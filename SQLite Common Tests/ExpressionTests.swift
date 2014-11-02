@@ -250,6 +250,21 @@ class ExpressionTests: XCTestCase {
         ExpectExecutionMatches(db, "('Hello ' COLLATE RTRIM)", users.select(collate(.RTrim, string)))
     }
 
+    func test_castDouble_buildsDoubleExpression() {
+        let string = Expression<String>(value: "10")
+        ExpectExecutionMatches(db, "CAST ('10' AS REAL)", users.select(cast(Double: string)))
+    }
+
+    func test_castInt_buildsIntegerExpression() {
+        let string = Expression<String>(value: "10")
+        ExpectExecutionMatches(db, "CAST ('10' AS INTEGER)", users.select(cast(Int: string)))
+    }
+
+    func test_castString_buildsStringExpression() {
+        let int = Expression<Int>(value: 10)
+        ExpectExecutionMatches(db, "CAST (10 AS TEXT)", users.select(cast(String: int)))
+    }
+
     func test_doubleAndOperator_withBooleanExpressions_buildsCompoundExpression() {
         let bool = Expression<Bool>(value: true)
         let query = users.select(bool && bool)

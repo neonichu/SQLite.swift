@@ -180,6 +180,22 @@ public func collate(collation: Collation, expression: Expression<String>) -> Exp
     return infix("COLLATE", expression, Expression(collation.rawValue))
 }
 
+public func cast<T: Value>(Double expression: Expression<T>) -> Expression<Double> {
+    return cast(expression, "REAL")
+}
+
+public func cast<T: Value>(Int expression: Expression<T>) -> Expression<Int> {
+    return cast(expression, "INTEGER")
+}
+
+public func cast<T: Value>(String expression: Expression<T>) -> Expression<String> {
+    return cast(expression, "TEXT")
+}
+
+private func cast<T: Value, U: Value>(expression: Expression<T>, type: String) -> Expression<U> {
+    return Expression("CAST (\(expression.SQL) AS \(type))", expression.bindings)
+}
+
 // MARK: - Predicates
 
 public func ==<T: protocol<Value, Equatable>>(lhs: Expression<T>, rhs: Expression<T>) -> Expression<Bool> {
