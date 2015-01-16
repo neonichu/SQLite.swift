@@ -1,6 +1,6 @@
 BUILD_TOOL = xcodebuild
-BUILD_PLATFORM ?= Mac
-BUILD_ARGUMENTS = -scheme 'SQLite $(BUILD_PLATFORM)'
+BUILD_SDK = macosx
+BUILD_ARGUMENTS = -scheme SQLite -sdk $(BUILD_SDK)
 
 XCPRETTY := $(shell command -v xcpretty)
 
