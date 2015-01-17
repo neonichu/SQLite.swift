@@ -3,7 +3,5 @@ osx_image: xcode61
 env:
   - BUILD_SDK=iphonesimulator ONLY_ACTIVE_ARCH=NO
   - BUILD_SDK=macosx
-before_install:
-  - gem install xcpretty --no-document
 script:
   - make test
