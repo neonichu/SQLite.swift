@@ -21,7 +21,11 @@
 // THE SOFTWARE.
 //
 
+#if COCOAPODS
+@import sqlite3
+#else
 #include <sqlite3.h>
+#endif
 
 typedef int (^SQLiteBusyHandlerCallback)(int times);
 void SQLiteBusyHandler(sqlite3 * handle, SQLiteBusyHandlerCallback callback);
